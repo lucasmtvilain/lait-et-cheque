@@ -91,9 +91,15 @@ var recursiveAsyncReadLine = function () {
     if (tourIA == 1) {
         tourIA = 0;
         var moveIa = RandomMove();
-        gameClient.move(moveIa);
-        console.log("IA a joué : "+moveIa);
-        recursiveAsyncReadLine();
+        if (moveIa != null) {
+            gameClient.move(moveIa);
+            console.log("IA a joué : "+moveIa);
+            recursiveAsyncReadLine();
+        } else {
+            console.log("Victoire du joueur!");
+            rl.close();
+        }
+
     } else {
         displayBoard(status.board);
 
@@ -145,12 +151,17 @@ function MoveDispo() {
 function RandomMove() {
     var movevalids = gameClient.getStatus();
     var listMove = [];
-    var index = 0;
     for (i in movevalids.notatedMoves) {
         listMove.push({move: i});
-        index++;
     }
-    return listMove[Math.floor(Math.random() * Math.floor(index))].move;
+
+    if (listMove.length > 0) {
+        var random = Math.floor(Math.random() * Math.floor(listMove.length));
+        console.log("randhomme: "+random+" ||| length: " + listMove.length);
+        return listMove[random].move;
+    } else {
+        return null;
+    }
 }
 
 recursiveAsyncReadLine(); //we have to actually start our recursion somehow
