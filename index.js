@@ -31,12 +31,20 @@ status = gameClient.getStatus();
 
 
 function displayBoard(board) {
-    let boardString = "";
+    let boardString = "    A  B  C  D  E  F  G  H\n";
     let boardSquares = board.squares;
     let isBlackCase = true;
     let pieceValue = null;
 
+
+
+
     for (i in boardSquares) {
+
+
+        if (i % 8 == 0)
+            boardString += " " + (i/8 + 1) + " ";
+
         pieceValue = "   ";
         if (boardSquares[i].piece != null) {
             if (boardSquares[i].piece.notation == "") {
@@ -50,7 +58,13 @@ function displayBoard(board) {
             } else {
                 pieceValue = colors.black(pieceValue);
             }
+
+
         }
+
+
+
+
         if (isBlackCase) {
             boardString += colors.bgYellow(pieceValue);
         } else {
@@ -78,7 +92,7 @@ var recursiveAsyncReadLine = function () {
         tourIA = 0;
         var moveIa = RandomMove()
         gameClient.move(moveIa);
-        console.log("IA à joué : "+moveIa)
+        console.log("IA a joué : "+moveIa)
         recursiveAsyncReadLine();
     } else {
         displayBoard(status.board);
@@ -119,7 +133,6 @@ function checkMove(move) {
 
 function MoveDispo() {
     var movevalids = gameClient.getStatus()
-    //console.log(movevalids.notatedMoves[0])
 
 
     for (i in movevalids.notatedMoves) {
