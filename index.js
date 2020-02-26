@@ -92,7 +92,7 @@ var recursiveAsyncReadLine = function () {
         tourIA = 0;
         var moveIa = RandomMove();
         gameClient.move(moveIa);
-        console.log("IA a joué : "+moveIa)
+        console.log("IA a joué : "+moveIa);
         recursiveAsyncReadLine();
     } else {
         displayBoard(status.board);
