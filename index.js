@@ -10,7 +10,7 @@ var rl = readline.createInterface({
     output: process.stdout
 });
 
-var tourIA = Math.floor(Math.random() * Math.floor(2))
+var tourIA = Math.floor(Math.random() * Math.floor(2));
 
 if (tourIA == 1) {
     console.log("Vous etes les NOIRS")
@@ -74,7 +74,7 @@ function displayBoard(board) {
         if (boardSquares[i].file == 'h') {
             boardString += "\n";
         } else {
-            isBlackCase = !isBlackCase
+            isBlackCase = !isBlackCase;
         }
 
 
@@ -90,7 +90,7 @@ var recursiveAsyncReadLine = function () {
 
     if (tourIA == 1) {
         tourIA = 0;
-        var moveIa = RandomMove()
+        var moveIa = RandomMove();
         gameClient.move(moveIa);
         console.log("IA a joué : "+moveIa)
         recursiveAsyncReadLine();
@@ -106,7 +106,7 @@ var recursiveAsyncReadLine = function () {
                 gameClient.move(answer);
                 tourIA = 1;
             } else {
-                console.log('delacement interdit :(')
+                console.log('delacement interdit :(');
             }
 
             // Continue the game
@@ -132,25 +132,25 @@ function checkMove(move) {
 }
 
 function MoveDispo() {
-    var movevalids = gameClient.getStatus()
+    var movevalids = gameClient.getStatus();
 
 
     for (i in movevalids.notatedMoves) {
-        console.log(i)
+        console.log(i);
     }
-    RandomMove()
+    RandomMove();
 }
 
 /// random move ////
 function RandomMove() {
-    var movevalids = gameClient.getStatus()
-    var listMove = []
-    var index = 0
+    var movevalids = gameClient.getStatus();
+    var listMove = [];
+    var index = 0;
     for (i in movevalids.notatedMoves) {
-        listMove.push({move: i})
+        listMove.push({move: i});
         index++;
     }
-    return listMove[Math.floor(Math.random() * Math.floor(index))].move
+    return listMove[Math.floor(Math.random() * Math.floor(index))].move;
 }
 
 recursiveAsyncReadLine(); //we have to actually start our recursion somehow
